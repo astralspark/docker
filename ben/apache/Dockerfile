@@ -21,7 +21,8 @@ RUN apt-get update && \
 		git \
 		unzip \
 		composer \
-		php-pear && \
+		php-pear \
+		sudo && \
 	# PhpMyAdmin
 	export VER="4.9.0.1" && \
 	wget https://files.phpmyadmin.net/phpMyAdmin/${VER}/phpMyAdmin-${VER}-all-languages.tar.gz && \
@@ -57,7 +58,8 @@ RUN apt-get update && \
 	cp /docker_temp/apache/xdebug.ini /etc/php/7.3/mods-available/ && \
 	# Prepare user
 	adduser momo && \
-	usermod -aG www-data momo;
+	usermod -aG www-data momo && \
+	usermod -p $(openssl passwd asd) momo;
 
 RUN pecl install xdebug;
 
