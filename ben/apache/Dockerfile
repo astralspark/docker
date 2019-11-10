@@ -22,7 +22,9 @@ RUN apt-get update && \
 		unzip \
 		composer \
 		php-pear \
-		sudo && \
+		sudo \
+		bash-completion && \
+	source /etc/bash_completion && \
 	# PhpMyAdmin
 	export VER="4.9.0.1" && \
 	wget https://files.phpmyadmin.net/phpMyAdmin/${VER}/phpMyAdmin-${VER}-all-languages.tar.gz && \
