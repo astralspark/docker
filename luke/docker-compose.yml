@@ -1,0 +1,31 @@
+version: '3.2'
+services:
+  apache:
+    build: apache/
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - type: bind
+        source: /srv/docker/luke/apache/www/
+        target: /srv/www/
+      - type: bind
+        source: /srv/docker/luke/apache/shared/
+        target: /docker_shared/
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: asd
+    volumes:
+      - type: bind
+        source: /srv/docker/luke/mysql/var/lib/mysql/
+        target: /var/lib/mysql/
+  redis:
+    image: redis:alpine
+  postgres:
+    image: postgres:12.2
+    environment:
+      POSTGRES_PASSWORD: asd

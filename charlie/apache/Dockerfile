@@ -17,13 +17,11 @@ RUN apt-get update && \
 		php5-xdebug \
 		php5-mysql \
 		openssl \
-		supervisor \
 		gem \
 		git \
-		unzip \ 
-		sudo
+		unzip \
+		supervisor \
 		bash-completion && \
-	source /etc/bash_completion && \
 	# Composer
 	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
@@ -65,5 +63,9 @@ RUN apt-get update && \
 	adduser momo && \
 	usermod -aG www-data momo && \
 	usermod -p $(openssl passwd asd) momo;
+
+SHELL ["/bin/bash", "-c"]
+
+RUN source /etc/bash_completion;
 
 CMD ["/startup_configuration/run.sh"]
