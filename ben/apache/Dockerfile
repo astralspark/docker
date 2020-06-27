@@ -9,8 +9,7 @@ RUN apt-get update && \
 	apt-get -y install \
 		nano \
 		curl \
-		wget && \
-	apt-get -y install \
+		wget \
 		nodejs \
 		npm \
 		php \
@@ -24,10 +23,10 @@ RUN apt-get update && \
 		composer \
 		php-pear \
 		sudo \
-		bash-completion && \
-	source /etc/bash_completion && \
-	# PhpMyAdmin
-	export VER="4.9.0.1" && \
+		bash-completion
+RUN ["/bin/bash", "-c", "source /etc/bash_completion"]
+# PhpMyAdmin
+RUN export VER="4.9.0.1" && \
 	wget https://files.phpmyadmin.net/phpMyAdmin/${VER}/phpMyAdmin-${VER}-all-languages.tar.gz && \
 	tar xvf phpMyAdmin-${VER}-all-languages.tar.gz && \
 	rm phpMyAdmin*.gz && \
@@ -62,8 +61,7 @@ RUN apt-get update && \
 	# Prepare user
 	adduser momo && \
 	usermod -aG www-data momo && \
-	usermod -p $(openssl passwd asd) momo;
-
-RUN pecl install xdebug;
+	usermod -p $(openssl passwd asd) momo && \
+	pecl install xdebug;
 
 CMD ["/startup_configuration/run.sh"]
