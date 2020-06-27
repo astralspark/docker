@@ -19,6 +19,7 @@ services:
     environment:
       MYSQL_USER: admin
       MYSQL_PASSWORD: asd
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - type: bind
         source: /srv/docker/charlie/mysql/var/lib/mysql/
