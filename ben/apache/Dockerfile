@@ -23,7 +23,8 @@ RUN apt-get update && \
 		composer \
 		php-pear \
 		sudo \
-		bash-completion
+		bash-completion \
+		acl
 RUN ["/bin/bash", "-c", "source /etc/bash_completion"]
 # PhpMyAdmin
 RUN export VER="4.9.0.1" && \
@@ -60,7 +61,7 @@ RUN export VER="4.9.0.1" && \
 	cp /docker_temp/apache/xdebug.ini /etc/php/7.3/mods-available/ && \
 	# Prepare user
 	adduser momo && \
-	usermod -aG www-data momo && \
+	usermod -aG www-data,sudo momo && \
 	usermod -p $(openssl passwd asd) momo && \
 	pecl install xdebug;
 

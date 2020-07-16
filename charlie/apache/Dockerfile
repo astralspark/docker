@@ -16,12 +16,15 @@ RUN apt-get update && \
 		php5 \
 		php5-xdebug \
 		php5-mysql \
+		php5-curl \
 		openssl \
 		gem \
 		git \
 		unzip \
 		supervisor \
-		bash-completion  && \
+		bash-completion \
+		acl \
+		sudo && \
 	# Composer
 	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
@@ -61,8 +64,13 @@ RUN apt-get update && \
 	cp /docker_temp/apache/xdebug.ini /etc/php5/mods-available/ && \
 	# Prepare user
 	adduser momo && \
-	usermod -aG www-data momo && \
-	usermod -p $(openssl passwd asd) momo;
+	usermod -aG www-data,sudo momo && \
+	usermod -p $(openssl passwd asd) momo && \
+	chmod g+s /srv/www && \
+	chown www-data:momo /srv/www && \
+	setfacl -d -m g::rwx /srv/www && \
+	setfacl -d -m o::rx /srv/www;
+	
 RUN ["/bin/bash", "-c", "source /etc/bash_completion"]
 
 CMD ["/startup_configuration/run.sh"]
