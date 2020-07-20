@@ -5,13 +5,15 @@
 - Redis
 
 Recommended local directory structure:
+<pre>
 ben -|
      |- apache -|
-                |- www
-                |- shared
+     |          |- www
+     |          |- shared
+     |           
      |- mysql -|
                | var_lib_mysql
-
+</pre>
 
 
 # Charlie
@@ -20,11 +22,15 @@ ben -|
 - PHP 5.6
 - Redis
 
+Recommended local directory structure:
+<pre>
 ben -|
      |- apache -|
-                |- www
-                |- shared
+     |          |- www
+     |          |- shared
+     |
      |- mysql -|
                | var_lib_mysql
+</pre>
 
-Note that Charlie might need updated hash for composer.
+**Note that Charlie might need updated hash for composer.**
