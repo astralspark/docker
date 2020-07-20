@@ -7,10 +7,10 @@ services:
       - "443:443"
     volumes:
       - type: bind
-        source: /srv/docker/charlie/apache/www/
+        source: D:\web\resources\charlie\apache\www\
         target: /srv/www/
       - type: bind
-        source: /srv/docker/charlie/apache/shared/
+        source: D:\web\resources\charlie\apache\shared\
         target: /docker_shared/
   mysql:
     image: mysql:5.7
@@ -22,7 +22,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - type: bind
-        source: /srv/docker/charlie/mysql/var/lib/mysql/
+        source: D:\web\resources\charlie\mysql\var_lib_mysql\
         target: /var/lib/mysql/
   redis:
     image: redis:alpine
